@@ -4,7 +4,6 @@ import { useInterviewStore } from "../store/useInterviewStore";
 import { generateQuestions } from "../services/openai";
 import type { InterviewType, Difficulty } from "../types";
 import UserButton from "../components/UserButton";
-import ThemeToggle from "../components/ThemeToggle";
 
 const interviewTypes: { label: string; value: InterviewType }[] = [
   { label: "Technical", value: "technical" },

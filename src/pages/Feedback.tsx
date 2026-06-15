@@ -10,7 +10,6 @@ import {
 } from "../services/openai";
 import { config } from "../config";
 import UserButton from "../components/UserButton";
-import ThemeToggle from "../components/ThemeToggle";
 import { exportFeedbackPDF } from "../utils/exportPDF";
 import { buildShareUrl, decodeShare } from "../utils/shareSession";
 import type { Question } from "../types";

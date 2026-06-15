@@ -4,7 +4,6 @@ import { useHistoryStore } from "../store/useHistoryStore";
 import { config } from "../config";
 import ScoreTrendChart from "../components/ScoreTrendChart";
 import UserButton from "../components/UserButton";
-import ThemeToggle from "../components/ThemeToggle";
 import type { Session } from "../types";
 
 // ── Icons ─────────────────────────────────────────────────────────────────────

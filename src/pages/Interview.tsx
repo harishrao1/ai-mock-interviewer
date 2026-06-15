@@ -15,7 +15,6 @@ import AnswerInput from "../components/AnswerInput";
 import QuestionCard from "../components/QuestionCard";
 import QuestionTimer from "../components/QuestionTimer";
 import UserButton from "../components/UserButton";
-import ThemeToggle from "../components/ThemeToggle";
 
 const tips = [
   "Use the STAR method — Situation, Task, Action, Result",
