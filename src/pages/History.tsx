@@ -4,6 +4,7 @@ import { useHistoryStore } from "../store/useHistoryStore";
 import { config } from "../config";
 import ScoreTrendChart from "../components/ScoreTrendChart";
 import UserButton from "../components/UserButton";
+import { HISTORY, BRAND } from "../constants/strings";
 import type { Session } from "../types";
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
@@ -174,7 +175,7 @@ function SessionCard({
               className="flex items-center gap-1.5 text-xs text-red-400/70 hover:text-red-400 transition-colors"
             >
               <TrashIcon />
-              Delete session
+              {HISTORY.deleteSession}
             </button>
           </div>
         </div>
@@ -206,9 +207,9 @@ export default function History() {
             </button>
             <span className="text-gray-700">|</span>
             <h1 className="text-lg font-bold">
-              Mock<span className="text-indigo-400">AI</span>
+              {BRAND.name}
               <span className="text-gray-500 font-normal text-sm ml-2">
-                · History
+                · {HISTORY.title}
               </span>
             </h1>
           </div>
@@ -216,11 +217,11 @@ export default function History() {
             {sessions.length > 0 && (
               <button
                 onClick={() => {
-                  if (confirm("Clear all session history?")) clearAll();
+                  if (confirm(HISTORY.clearAllConfirmation)) clearAll();
                 }}
                 className="text-xs text-red-400/60 hover:text-red-400 transition-colors"
               >
-                Clear all
+                {HISTORY.clearAll}
               </button>
             )}
             <UserButton />
@@ -243,15 +244,15 @@ export default function History() {
                 <polyline points="12 6 12 12 16 14" />
               </svg>
             </div>
-            <p className="text-gray-400 font-medium">No sessions yet</p>
+            <p className="text-gray-400 font-medium">{HISTORY.noSessions}</p>
             <p className="text-gray-600 text-sm mt-1">
-              Complete an interview to see your history here.
+              {HISTORY.noSessionsSubtitle}
             </p>
             <button
               onClick={() => navigate("/")}
               className="mt-6 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white-keep text-sm font-medium rounded-xl transition-colors"
             >
-              Start an interview →
+              {HISTORY.startInterview}
             </button>
           </div>
         ) : (
@@ -260,7 +261,7 @@ export default function History() {
             {config.features.scoreChart && sessions.length >= 2 && (
               <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 animate-slide-up">
                 <h2 className="text-sm font-semibold text-white mb-4">
-                  Score trend
+                  {HISTORY.scoreTrend}
                 </h2>
                 <ScoreTrendChart sessions={sessions} />
               </div>
@@ -270,17 +271,17 @@ export default function History() {
             <div className="grid grid-cols-3 gap-3 animate-slide-up">
               {[
                 {
-                  label: "Sessions",
+                  label: HISTORY.stats.sessions,
                   value: sessions.length,
                   color: "text-indigo-400",
                 },
                 {
-                  label: "Best score",
+                  label: HISTORY.stats.bestScore,
                   value: Math.max(...sessions.map((s) => s.overallScore)),
                   color: "text-green-400",
                 },
                 {
-                  label: "Average",
+                  label: HISTORY.stats.average,
                   value:
                     Math.round(
                       (sessions.reduce((sum, s) => sum + s.overallScore, 0) /

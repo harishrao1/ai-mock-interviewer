@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
+import { LOGIN } from "../constants/strings";
 
 function GoogleLogo() {
   return (
@@ -24,13 +25,6 @@ function GoogleLogo() {
     </svg>
   );
 }
-
-const features = [
-  "AI-generated questions tailored to any job description",
-  "Technical, behavioural, and system design rounds",
-  "Instant scoring with actionable improvement tips",
-  "Session history and score trend tracking",
-];
 
 export default function Login() {
   const navigate = useNavigate();
@@ -61,13 +55,16 @@ export default function Login() {
             Mock<span className="text-indigo-400">AI</span>
           </h1>
           <p className="text-gray-300 text-xl leading-relaxed">
-            Practice interviews with AI.
-            <br />
-            Get scored. Improve faster.
+            {LOGIN.heroSubtitle.map((line, index) => (
+              <span key={index}>
+                {line}
+                {index < LOGIN.heroSubtitle.length - 1 && <br />}
+              </span>
+            ))}
           </p>
 
           <div className="mt-10 space-y-3">
-            {features.map((feat, i) => (
+            {LOGIN.features.map((feat, i) => (
               <div key={i} className="flex items-start gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 shrink-0" />
                 <p className="text-gray-400 text-sm leading-relaxed">{feat}</p>
@@ -77,7 +74,7 @@ export default function Login() {
 
           <div className="mt-12 pt-8 border-t border-gray-800/60">
             <p className="text-xs text-gray-600">
-              Powered by AI · Your data stays in your browser
+              {LOGIN.sideNote}
             </p>
           </div>
         </div>
@@ -92,15 +89,14 @@ export default function Login() {
               Mock<span className="text-indigo-400">AI</span>
             </h1>
             <p className="text-gray-400 text-sm mt-2">
-              Practice interviews with AI
+              {LOGIN.mobileSubtitle}
             </p>
           </div>
 
-          {/* Desktop heading */}
           <div className="hidden lg:block mb-8">
-            <h2 className="text-2xl font-semibold">Welcome back</h2>
+            <h2 className="text-2xl font-semibold">{LOGIN.welcomeTitle}</h2>
             <p className="text-gray-500 text-sm mt-1">
-              Sign in to access your sessions and history
+              {LOGIN.welcomeSubtitle}
             </p>
           </div>
 
@@ -111,14 +107,14 @@ export default function Login() {
               className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-50 active:scale-[0.99] text-gray-900 font-medium py-3 px-4 rounded-xl transition-all shadow-sm"
             >
               <GoogleLogo />
-              Continue with Google
+              {LOGIN.buttons.google}
             </button>
 
             <button
               onClick={signInWithMock}
               className="w-full flex items-center justify-center gap-3 bg-gray-900 border border-gray-850 hover:bg-gray-800 hover:text-white active:scale-[0.99] text-gray-300 font-medium py-3 px-4 rounded-xl transition-all shadow-sm"
             >
-              Sign in with Mock Account (Dev Mode)
+              {LOGIN.buttons.mockAccount}
             </button>
           </div>
 
@@ -127,14 +123,12 @@ export default function Login() {
           )}
 
           <div className="mt-8 space-y-2">
-            <div className="flex items-start gap-2 text-xs text-gray-600">
-              <span className="mt-0.5 shrink-0 text-indigo-500/60">→</span>
-              We only use Google to identify you — no passwords stored.
-            </div>
-            <div className="flex items-start gap-2 text-xs text-gray-600">
-              <span className="mt-0.5 shrink-0 text-indigo-500/60">→</span>
-              Your interview history is saved locally in your browser.
-            </div>
+            {LOGIN.authNotes.map((note, index) => (
+              <div key={index} className="flex items-start gap-2 text-xs text-gray-600">
+                <span className="mt-0.5 shrink-0 text-indigo-500/60">→</span>
+                {note}
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -12,6 +12,7 @@ import { config } from "../config";
 import UserButton from "../components/UserButton";
 import { exportFeedbackPDF } from "../utils/exportPDF";
 import { buildShareUrl, decodeShare } from "../utils/shareSession";
+import { FEEDBACK, BRAND, getScoreTag, getScoreColor } from "../constants/strings";
 import type { Question } from "../types";
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
@@ -88,21 +89,6 @@ function ShareIcon() {
   );
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
-const getScoreColor = (score: number) => {
-  if (score >= 8) return "text-green-400";
-  if (score >= 6) return "text-yellow-400";
-  return "text-red-400";
-};
-
-const getTag = (score: number) => {
-  if (score >= 7)
-    return { label: "Strong", cls: "bg-green-400/10 text-green-400" };
-  if (score === 0)
-    return { label: "Skipped", cls: "bg-gray-400/10 text-gray-400" };
-  return { label: "Needs work", cls: "bg-yellow-400/10 text-yellow-400" };
-};
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
@@ -211,7 +197,7 @@ export default function Feedback() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <h1 className="text-lg font-bold">
-              Mock<span className="text-indigo-400">AI</span>
+              {BRAND.name}
             </h1>
             {sessionId && (
               <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-gray-600 bg-gray-900 border border-gray-800 rounded-lg px-2.5 py-1 font-mono">
@@ -224,7 +210,7 @@ export default function Feedback() {
           <div className="flex items-center gap-3">
             <span className="hidden sm:flex text-sm text-green-400 font-medium items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-              Session complete
+              {FEEDBACK.sessionComplete}
             </span>
             <nav className="flex items-center gap-1.5">
               <Link
@@ -267,9 +253,9 @@ export default function Feedback() {
               {overallScore}
             </div>
             <div className="text-sm text-gray-400 print:text-gray-500">
-              Overall score
+              {FEEDBACK.stats.overallScore}
             </div>
-            <div className="text-xs text-gray-600 mt-0.5">out of 10</div>
+            <div className="text-xs text-gray-600 mt-0.5">{FEEDBACK.stats.outOf10}</div>
             {delta !== null && (
               <div
                 className={`text-xs mt-2 font-medium ${delta >= 0 ? "text-green-400" : "text-red-400"} print:hidden`}
@@ -284,7 +270,7 @@ export default function Feedback() {
               {answered}/{questions.length}
             </div>
             <div className="text-sm text-gray-400 print:text-gray-500">
-              Answered
+              {FEEDBACK.stats.questionsAnswered}
             </div>
             <div className="text-xs text-gray-600 mt-0.5">questions</div>
           </div>
@@ -293,7 +279,7 @@ export default function Feedback() {
               {needsWork}
             </div>
             <div className="text-sm text-gray-400 print:text-gray-500">
-              To improve
+              {FEEDBACK.stats.areasToImprove}
             </div>
             <div className="text-xs text-gray-600 mt-0.5">areas</div>
           </div>
@@ -321,7 +307,7 @@ export default function Feedback() {
               }`}
             >
               <ShareIcon />
-              {copied ? "Copied!" : "Share"}
+              {copied ? FEEDBACK.buttons.copied : FEEDBACK.buttons.share}
             </button>
 
             {/* PDF export */}
@@ -336,7 +322,7 @@ export default function Feedback() {
                 ) : (
                   <PrintIcon />
                 )}
-                {isExporting ? "Exporting…" : "Export PDF"}
+                {isExporting ? FEEDBACK.buttons.exporting : FEEDBACK.buttons.exportPDF}
               </button>
             )}
           </div>
@@ -346,7 +332,7 @@ export default function Feedback() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 print:grid-cols-1 print:gap-3">
           {feedback.map((f, index) => {
             const question = questions.find((q) => q.id === f.questionId);
-            const tag = getTag(f.score);
+            const tag = getScoreTag(f.score);
 
             return (
               <div
@@ -381,7 +367,7 @@ export default function Feedback() {
                 <div className="space-y-2">
                   <div className="bg-green-400/5 border border-green-400/10 rounded-lg px-3 py-2.5 print:bg-green-50 print:border-green-200">
                     <p className="text-xs font-semibold text-green-400 mb-1 print:text-green-700">
-                      What was good
+                      {FEEDBACK.feedbackSections.whatWasGood}
                     </p>
                     <p className="text-xs text-gray-300 leading-relaxed print:text-gray-700">
                       {f.good}
@@ -389,7 +375,7 @@ export default function Feedback() {
                   </div>
                   <div className="bg-yellow-400/5 border border-yellow-400/10 rounded-lg px-3 py-2.5 print:bg-yellow-50 print:border-yellow-200">
                     <p className="text-xs font-semibold text-yellow-400 mb-1 print:text-yellow-700">
-                      What to improve
+                      {FEEDBACK.feedbackSections.whatToImprove}
                     </p>
                     <p className="text-xs text-gray-300 leading-relaxed print:text-gray-700">
                       {f.improve}
@@ -397,7 +383,7 @@ export default function Feedback() {
                   </div>
                   <div className="bg-indigo-400/5 border border-indigo-400/10 rounded-lg px-3 py-2.5 print:bg-indigo-50 print:border-indigo-200">
                     <p className="text-xs font-semibold text-indigo-400 mb-1 print:text-indigo-700">
-                      Ideal answer hint
+                      {FEEDBACK.feedbackSections.idealAnswerHint}
                     </p>
                     <p className="text-xs text-gray-300 leading-relaxed print:text-gray-700">
                       {f.idealHint}
@@ -415,7 +401,7 @@ export default function Feedback() {
             to="/history"
             className="flex-1 py-3.5 border border-gray-800 hover:border-gray-600 text-gray-400 hover:text-gray-300 font-medium rounded-xl text-sm transition-all text-center"
           >
-            View history →
+            {FEEDBACK.buttons.viewHistory}
           </Link>
           <button
             onClick={() => {
@@ -424,7 +410,7 @@ export default function Feedback() {
             }}
             className="flex-1 py-3.5 bg-indigo-600 hover:bg-indigo-500 active:scale-[0.99] text-white-keep font-medium rounded-xl text-sm transition-all"
           >
-            Start new session →
+            {FEEDBACK.buttons.startNewSession}
           </button>
         </div>
       </main>

@@ -15,12 +15,7 @@ import AnswerInput from "../components/AnswerInput";
 import QuestionCard from "../components/QuestionCard";
 import QuestionTimer from "../components/QuestionTimer";
 import UserButton from "../components/UserButton";
-
-const tips = [
-  "Use the STAR method — Situation, Task, Action, Result",
-  "Be specific: name tools, metrics, and outcomes",
-  "Keep answers focused — quality over length",
-];
+import { INTERVIEW, BRAND } from "../constants/strings";
 
 function HistoryIcon() {
   return (
@@ -148,7 +143,7 @@ export default function Interview() {
 
       navigate("/feedback");
     } catch (err) {
-      setError("Failed to evaluate answers. Please try again.");
+      setError(INTERVIEW.errors.failedToEvaluate);
       console.error(err);
     } finally {
       setLoading(false);
@@ -165,16 +160,17 @@ export default function Interview() {
       <header className="sticky top-0 z-10 border-b border-gray-800 bg-gray-950/95 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-6 py-3 flex items-center gap-4">
           <h1 className="text-lg font-bold shrink-0">
-            Mock<span className="text-indigo-400">AI</span>
+            {BRAND.name}
           </h1>
 
           {/* Progress */}
           <div className="flex-1">
             <div className="flex justify-between text-xs text-gray-500 mb-1.5">
               <span>
-                Question {currentQuestionIndex + 1} of {questions.length}
+                {INTERVIEW.questionLabel} {currentQuestionIndex + 1} {INTERVIEW.ofLabel}{" "}
+                {questions.length}
               </span>
-              <span>{Math.round(progress)}% complete</span>
+              <span>{Math.round(progress)}% {INTERVIEW.progressLabel}</span>
             </div>
             <div className="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
               <div
@@ -233,15 +229,15 @@ export default function Interview() {
             className="space-y-4 animate-slide-in-left"
           >
             <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider">
-              Question {currentQuestionIndex + 1}
+              {INTERVIEW.questionLabel} {currentQuestionIndex + 1}
             </p>
             <QuestionCard question={currentQuestion} />
             <div className="bg-gray-900/60 border border-gray-800/80 rounded-xl p-4">
               <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
-                Tips for a strong answer
+                {INTERVIEW.tipsTitle}
               </p>
               <ul className="space-y-2">
-                {tips.map((tip, i) => (
+                {INTERVIEW.tips.map((tip, i) => (
                   <li
                     key={i}
                     className="flex items-start gap-2 text-xs text-gray-500 animate-slide-up"
@@ -261,7 +257,7 @@ export default function Interview() {
             className="animate-slide-in-right"
           >
             <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
-              Your answer
+              {INTERVIEW.yourAnswer}
             </p>
             <AnswerInput
               key={currentQuestion.id}
@@ -280,9 +276,9 @@ export default function Interview() {
           <div className="text-center animate-fade-in">
             <div className="w-10 h-10 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
             <p className="text-gray-300 text-sm font-medium">
-              Evaluating your answers…
+              {INTERVIEW.loadingMessage}
             </p>
-            <p className="text-gray-600 text-xs mt-1">This may take a moment</p>
+            <p className="text-gray-600 text-xs mt-1">{INTERVIEW.loadingSubtext}</p>
           </div>
         </div>
       )}

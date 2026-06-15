@@ -4,27 +4,7 @@ import { useInterviewStore } from "../store/useInterviewStore";
 import { generateQuestions } from "../services/openai";
 import type { InterviewType, Difficulty } from "../types";
 import UserButton from "../components/UserButton";
-
-const interviewTypes: { label: string; value: InterviewType }[] = [
-  { label: "Technical", value: "technical" },
-  { label: "Behavioural", value: "behavioural" },
-  { label: "System Design", value: "system-design" },
-  { label: "Mixed", value: "mixed" },
-];
-
-const difficulties: { label: string; value: Difficulty }[] = [
-  { label: "Junior", value: "junior" },
-  { label: "Mid", value: "mid" },
-  { label: "Senior", value: "senior" },
-];
-
-const questionCounts = [5, 6, 7];
-
-const features = [
-  "AI-generated questions tailored to any job description",
-  "Technical, behavioural, and system design rounds",
-  "Instant scoring with actionable improvement tips",
-];
+import { HOME, BRAND, INTERVIEW_TYPES, DIFFICULTIES, QUESTION_COUNTS } from "../constants/strings";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -38,7 +18,7 @@ export default function Home() {
 
   const handleGenerate = async () => {
     if (!jd.trim()) {
-      setError("Please paste a job description first");
+      setError(HOME.errors.emptyJD);
       return;
     }
 
@@ -50,9 +30,7 @@ export default function Home() {
       setQuestions(questions);
       navigate("/interview");
     } catch (err) {
-      setError(
-        "Failed to generate questions. Check your API key and try again.",
-      );
+      setError(HOME.errors.failedToGenerate);
       console.error(err);
     } finally {
       setLoading(false);
@@ -69,18 +47,19 @@ export default function Home() {
 
         <div className="relative z-10 animate-slide-in-left">
           <h1 className="text-6xl font-bold tracking-tight mb-5">
-            Mock<span className="text-indigo-400">AI</span>
+            {BRAND.name}
           </h1>
           <p className="text-gray-300 text-xl leading-relaxed">
-            Paste a job description.
-            <br />
-            Get tailored interview questions.
-            <br />
-            Ace your next interview.
+            {HOME.heroSubtitle.map((line, i) => (
+              <span key={i}>
+                {line}
+                {i < HOME.heroSubtitle.length - 1 && <br />}
+              </span>
+            ))}
           </p>
 
           <div className="mt-10 space-y-3">
-            {features.map((feat, i) => (
+            {HOME.features.map((feat, i) => (
               <div key={i} className="flex items-start gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-2 shrink-0" />
                 <p className="text-gray-400 text-sm leading-relaxed">{feat}</p>
@@ -89,9 +68,7 @@ export default function Home() {
           </div>
 
           <div className="mt-12 pt-8 border-t border-gray-800/60">
-            <p className="text-xs text-gray-600">
-              Powered by AI · No answers stored
-            </p>
+            <p className="text-xs text-gray-600">{BRAND.slogan}</p>
           </div>
         </div>
       </div>
@@ -104,11 +81,9 @@ export default function Home() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h1 className="text-3xl font-bold">
-                Mock<span className="text-indigo-400">AI</span>
+                {BRAND.name}
               </h1>
-              <p className="text-gray-400 mt-1 text-sm">
-                Paste a JD. Get tailored questions. Ace your interview.
-              </p>
+              <p className="text-gray-400 mt-1 text-sm">{HOME.setupSubtitle}</p>
             </div>
             <nav className="flex items-center gap-1.5">
               <Link
@@ -156,10 +131,10 @@ export default function Home() {
           <div className="mb-7 flex items-start justify-between gap-4">
             <div>
               <h2 className="text-2xl font-semibold text-white">
-                Set up your session
+                {HOME.setupTitle}
               </h2>
               <p className="text-gray-500 text-sm mt-1">
-                Configure the interview to match your target role
+                {HOME.setupSubtitle}
               </p>
             </div>
             {/* Desktop nav — only visible when the hero panel is shown */}
@@ -208,13 +183,13 @@ export default function Home() {
             {/* JD Input */}
             <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">
-                Job description
+                {HOME.labels.jobDescription}
               </label>
               <textarea
                 value={jd}
                 onChange={(e) => setJd(e.target.value)}
                 rows={7}
-                placeholder="We are looking for a Senior Frontend Engineer with 3+ years of React experience..."
+                placeholder={HOME.placeholders.jobDescription}
                 className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 resize-none focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/20 transition-all"
               />
             </div>
@@ -222,10 +197,10 @@ export default function Home() {
             {/* Interview Type */}
             <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">
-                Interview type
+                {HOME.labels.interviewType}
               </label>
               <div className="grid grid-cols-2 gap-2">
-                {interviewTypes.map((t) => (
+                {Object.values(INTERVIEW_TYPES).map((t) => (
                   <button
                     key={t.value}
                     onClick={() => setType(t.value)}
@@ -245,10 +220,10 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">
-                  Difficulty
+                  {HOME.labels.difficulty}
                 </label>
                 <div className="flex gap-1.5">
-                  {difficulties.map((d) => (
+                  {Object.values(DIFFICULTIES).map((d) => (
                     <button
                       key={d.value}
                       onClick={() => setDifficulty(d.value)}
@@ -266,10 +241,10 @@ export default function Home() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-2">
-                  Questions
+                  {HOME.labels.questions}
                 </label>
                 <div className="flex gap-1.5">
-                  {questionCounts.map((n) => (
+                  {QUESTION_COUNTS.map((n) => (
                     <button
                       key={n}
                       onClick={() => setCount(n)}
@@ -298,10 +273,10 @@ export default function Home() {
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
                   <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Generating questions...
+                  {HOME.buttons.generatingQuestions}
                 </span>
               ) : (
-                "Generate questions →"
+                HOME.buttons.generateQuestions
               )}
             </button>
           </div>
