@@ -70,12 +70,12 @@ export default function Footer() {
               </a>
               . {FOOTER.credits.poweredBy}{" "}
               <a
-                href="https://openai.com"
+                href="https://groq.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-indigo-400 hover:text-indigo-300 transition-colors"
               >
-                OpenAI
+                Groq
               </a>
               {" "}
               {FOOTER.credits.and}{" "}
