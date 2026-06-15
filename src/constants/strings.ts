@@ -222,12 +222,16 @@ export const FOOTER = {
     },
     builtWith: {
         title: "Built with",
-        technologies: [
-            { label: "React 18 + TypeScript", url: "https://react.dev" },
-            { label: "Vite", url: "https://vitejs.dev" },
-            { label: "Tailwind CSS", url: "https://tailwindcss.com" },
-            { label: "OpenAI API", url: "https://openai.com" },
-            { label: "Firebase", url: "https://firebase.google.com" },
+         technologies: [
+            { label: "React 19 + TypeScript", url: "https://react.dev"                       },
+            { label: "Vite",                  url: "https://vitejs.dev"                       },
+            { label: "Tailwind CSS",          url: "https://tailwindcss.com"                  },
+            { label: "Zustand",               url: "https://zustand-demo.pmnd.rs"             },
+            { label: "Recharts",              url: "https://recharts.org"                     },
+            { label: "React Router",          url: "https://reactrouter.com"                  },
+            { label: "Groq API",              url: "https://groq.com"                        },
+            { label: "Firebase",              url: "https://firebase.google.com"              },
+            { label: "html2canvas + jsPDF",   url: "https://github.com/niklasvh/html2canvas" },
         ],
     },
     links: {
