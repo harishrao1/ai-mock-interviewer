@@ -217,7 +217,7 @@ export default function History() {
             {sessions.length > 0 && (
               <button
                 onClick={() => {
-                  if (confirm(HISTORY.clearAllConfirmation)) clearAll();
+                  if (confirm(HISTORY.clearAll)) clearAll();
                 }}
                 className="text-xs text-red-400/60 hover:text-red-400 transition-colors"
               >

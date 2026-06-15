@@ -1,6 +1,6 @@
 export type InterviewType =
   | "technical"
-  | "behavioural"
+  | "behavioral"
   | "system-design"
   | "mixed";
 

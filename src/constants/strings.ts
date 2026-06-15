@@ -9,10 +9,10 @@
 
 export const BRAND = {
     name: "MockAI",
-    tagline: "Personalized interview preparation powered by AI.",
-    slogan: "Powered by AI · No answers stored",
+    tagline: "Your next offer starts here.",
+    slogan: "AI-powered · Zero data retention",
     fullDescription:
-        "An AI-powered interview coaching platform that creates personalized mock interviews, evaluates your responses, and provides actionable feedback to help you succeed in real-world interviews.",
+        "An AI-powered interview coaching platform that creates personalized mock interviews, evaluates your responses, and provides actionable feedback to help you land your next role.",
 } as const;
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -21,23 +21,22 @@ export const BRAND = {
 
 export const INTERVIEW_TYPES = {
     TECHNICAL: { label: "Technical", value: "technical" },
-    BEHAVIOURAL: { label: "Behavioural", value: "behavioural" },
+    BEHAVIORAL: { label: "Behavioral", value: "behavioral" },
     SYSTEM_DESIGN: { label: "System Design", value: "system-design" },
     MIXED: { label: "Mixed", value: "mixed" },
 } as const;
 
 export const DIFFICULTIES = {
     JUNIOR: { label: "Junior", value: "junior" },
-    MID: { label: "Mid", value: "mid" },
+    MID: { label: "Mid-level", value: "mid" },
     SENIOR: { label: "Senior", value: "senior" },
 } as const;
 
 export const QUESTION_COUNTS = [5, 6, 7] as const;
 
-// Type labels for display (full sentences)
 export const TYPE_LABELS: Record<string, string> = {
     technical: "Technical",
-    behavioural: "Behavioural",
+    behavioral: "Behavioral",
     "system-design": "System Design",
     mixed: "Mixed",
 } as const;
@@ -49,17 +48,17 @@ export const TYPE_LABELS: Record<string, string> = {
 export const HOME = {
     heroTitle: "MockAI",
     heroSubtitle: [
-        "Paste a job description.",
-        "Get tailored interview questions.",
-        "Ace your next interview.",
+        "Drop in a job description.",
+        "Get questions built for that role.",
+        "Walk in ready.",
     ],
     features: [
-        "AI-generated questions tailored to any job description",
-        "Technical, behavioural, and system design rounds",
-        "Instant scoring with actionable improvement tips",
+        "Questions generated from the actual job description",
+        "Technical, behavioral, and system design rounds",
+        "Instant scoring with specific, actionable feedback",
     ],
-    setupTitle: "Set up your session",
-    setupSubtitle: "Configure the interview to match your target role",
+    setupTitle: "Configure your interview",
+    setupSubtitle: "Tailor the session to the role you're applying for",
     labels: {
         jobDescription: "Job description",
         interviewType: "Interview type",
@@ -68,17 +67,16 @@ export const HOME = {
     },
     placeholders: {
         jobDescription:
-            "We are looking for a Senior Frontend Engineer with 3+ years of React experience...",
+            "We are looking for a Senior Frontend Engineer with 3+ years of React experience…",
     },
     buttons: {
-        generateQuestions: "Generate questions →",
-        generatingQuestions: "Generating questions...",
+        generateQuestions: "Build my question set →",
+        generatingQuestions: "Building your question set…",
         startInterview: "Start an interview →",
     },
     errors: {
-        emptyJD: "Please paste a job description first",
-        failedToGenerate:
-            "Failed to generate questions. Check your API key and try again.",
+        emptyJD: "Add a job description to get started.",
+        failedToGenerate: "Could not generate questions. Verify your API key and try again.",
     },
     nav: {
         history: "History",
@@ -92,25 +90,25 @@ export const HOME = {
 
 export const LOGIN = {
     heroSubtitle: [
-        "Practice interviews with AI.",
-        "Get scored. Improve faster.",
+        "Sharpen your interview skills with AI.",
+        "Get scored. Close the gap.",
     ],
     features: [
-        "AI-generated questions tailored to any job description",
-        "Technical, behavioural, and system design rounds",
-        "Instant scoring with actionable improvement tips",
-        "Session history and score trend tracking",
+        "Questions generated from the actual job description",
+        "Technical, behavioral, and system design rounds",
+        "Instant scoring with specific, actionable feedback",
+        "Track your scores and measure progress over time",
     ],
-    sideNote: "Powered by AI · Your data stays in your browser",
-    mobileSubtitle: "Practice interviews with AI",
-    welcomeTitle: "Welcome back",
-    welcomeSubtitle: "Sign in to access your sessions and history",
+    sideNote: "AI-powered · Your data stays in your browser",
+    mobileSubtitle: "Sharpen your interview skills with AI",
+    welcomeTitle: "Good to see you again",
+    welcomeSubtitle: "Sign in to pick up where you left off",
     buttons: {
         google: "Continue with Google",
-        mockAccount: "Sign in with Mock Account (Dev Mode)",
+        mockAccount: "Sign in with mock account (dev mode)",
     },
     authNotes: [
-        "We only use Google to identify you — no passwords stored.",
+        "We use Google only to verify your identity — we never store passwords.",
         "Your interview history is saved locally in your browser.",
     ],
     nav: {
@@ -129,14 +127,14 @@ export const INTERVIEW = {
     yourAnswer: "Your answer",
     tipsTitle: "Tips for a strong answer",
     tips: [
-        "Use the STAR method — Situation, Task, Action, Result",
-        "Be specific: name tools, metrics, and outcomes",
-        "Keep answers focused — quality over length",
+        "Structure your answer: Situation → Task → Action → Result",
+        "Name the tools you used and the outcomes you delivered",
+        "Stay concise — a tight two-minute answer beats a rambling five",
     ],
-    loadingMessage: "Evaluating your answers…",
-    loadingSubtext: "This may take a moment",
+    loadingMessage: "Reviewing your responses…",
+    loadingSubtext: "Hang tight — this usually takes 10–20 seconds.",
     errors: {
-        failedToEvaluate: "Failed to evaluate answers. Please try again.",
+        failedToEvaluate: "Could not evaluate your answers. Please try again.",
     },
     nav: {
         history: "History",
@@ -149,31 +147,31 @@ export const INTERVIEW = {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export const FEEDBACK = {
-    printTitle: "MockAI — Interview Feedback Report",
-    sessionComplete: "Session complete",
+    printTitle: "MockAI — Interview feedback report",
+    sessionComplete: "Interview complete — here's how you did",
     stats: {
         overallScore: "Overall score",
         outOf10: "out of 10",
         questionsAnswered: "Answered",
         questions: "questions",
-        areasToImprove: "To improve",
+        areasToImprove: "Areas to improve",
         areas: "areas",
-        vsAvg: "vs your avg",
+        vsAvg: "vs. your avg.",
     },
-    perQuestionFeedback: "Per-question feedback",
-    feedbackSubtitle: "Detailed breakdown of each answer",
+    perQuestionFeedback: "Question-by-question breakdown",
+    feedbackSubtitle: "See exactly where you excelled and what to sharpen",
     buttons: {
         share: "Share",
         copied: "Copied!",
         exportPDF: "Export PDF",
         exporting: "Exporting…",
         viewHistory: "View history →",
-        startNewSession: "Start new session →",
+        startNewSession: "Practice again →",
     },
     feedbackSections: {
-        whatWasGood: "What was good",
+        whatWasGood: "What went well",
         whatToImprove: "What to improve",
-        idealAnswerHint: "Ideal answer hint",
+        idealAnswerHint: "What a strong answer looks like",
     },
     scoreTags: {
         strong: "Strong",
@@ -201,11 +199,10 @@ export const HISTORY = {
         average: "Average",
     },
     pastSessions: "Past sessions",
-    noSessions: "No sessions yet",
-    noSessionsSubtitle: "Complete an interview to see your history here.",
+    noSessions: "Nothing here yet",
+    noSessionsSubtitle: "Finish your first interview and your results will appear here.",
     clearAll: "Clear all",
-    clearAllConfirmation: "Clear all session history?",
-    confirmClear: "Clear all session history?",
+    confirmClear: "Delete all sessions? This cannot be undone.",
     deleteSession: "Delete session",
     startInterview: "Start an interview →",
     nav: {
@@ -221,10 +218,10 @@ export const FOOTER = {
     about: {
         title: "About MockAI",
         description:
-            "AI-powered interview preparation platform that generates personalized questions and provides instant feedback to help you ace your next interview.",
+            "An AI-powered interview preparation platform that generates personalized questions and provides instant feedback to help you land your next role.",
     },
     builtWith: {
-        title: "Built With",
+        title: "Built with",
         technologies: [
             { label: "React 18 + TypeScript", url: "https://react.dev" },
             { label: "Vite", url: "https://vitejs.dev" },
@@ -236,15 +233,9 @@ export const FOOTER = {
     links: {
         title: "Links",
         items: [
-            {
-                label: "GitHub Repository",
-                url: "https://github.com/harishrao1/ai-mock-interviewer",
-            },
-            {
-                label: "Report Issues",
-                url: "https://github.com/harishrao1/ai-mock-interviewer/issues",
-            },
-            { label: "Creator Profile", url: "https://github.com/harishrao1" },
+            { label: "GitHub repository", url: "https://github.com/harishrao1/ai-mock-interviewer" },
+            { label: "Report a bug", url: "https://github.com/harishrao1/ai-mock-interviewer/issues" },
+            { label: "Creator profile", url: "https://github.com/harishrao1" },
         ],
     },
     credits: {
@@ -252,19 +243,15 @@ export const FOOTER = {
         by: "by",
         poweredBy: "Powered by",
         and: "and",
-        specialThanks: "Special thanks to the open-source community.",
+        specialThanks: "Built on the shoulders of open-source.",
     },
     copyright: {
         year: new Date().getFullYear(),
-        text: `&copy; {{year}} MockAI. All rights reserved.`,
+        text: `© ${new Date().getFullYear()} MockAI. All rights reserved.`,
         license: "Licensed under MIT",
         separator: "|",
     },
 } as const;
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// COMMON / SHARED
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export const COMMON = {
     buttons: {
@@ -282,7 +269,7 @@ export const COMMON = {
         close: "Close",
     },
     labels: {
-        loading: "Loading...",
+        loading: "Loading…",
         error: "Error",
         success: "Success",
         warning: "Warning",
@@ -293,7 +280,7 @@ export const COMMON = {
         deleted: "Deleted successfully",
         saved: "Saved successfully",
         copied: "Copied to clipboard",
-        loadingMore: "Loading more...",
+        loadingMore: "Loading more…",
     },
     time: {
         seconds: "seconds",
@@ -303,78 +290,40 @@ export const COMMON = {
     },
 } as const;
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// UTILITY HELPERS
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-/**
- * Get interview type label by value
- */
-export function getInterviewTypeLabel(
-    value: string
-): string {
+export function getInterviewTypeLabel(value: string): string {
     return TYPE_LABELS[value] || value;
 }
 
-/**
- * Get all interview type options
- */
 export function getInterviewTypeOptions() {
     return Object.values(INTERVIEW_TYPES);
 }
 
-/**
- * Get all difficulty options
- */
 export function getDifficultyOptions() {
     return Object.values(DIFFICULTIES);
 }
 
-/**
- * Get score tag label and styling based on score
- */
-export function getScoreTag(
-    score: number
-): { label: string; cls: string } {
-    if (score >= 7)
-        return {
-            label: FEEDBACK.scoreTags.strong,
-            cls: "bg-green-400/10 text-green-400",
-        };
+export function getScoreTag(score: number): { label: string; cls: string } {
     if (score === 0)
-        return {
-            label: FEEDBACK.scoreTags.skipped,
-            cls: "bg-gray-400/10 text-gray-400",
-        };
-    return {
-        label: FEEDBACK.scoreTags.needsWork,
-        cls: "bg-yellow-400/10 text-yellow-400",
-    };
+        return { label: FEEDBACK.scoreTags.skipped, cls: "bg-gray-400/10 text-gray-400" };
+    if (score >= 7)
+        return { label: FEEDBACK.scoreTags.strong, cls: "bg-green-400/10 text-green-400" };
+    if (score >= 5)
+        return { label: FEEDBACK.scoreTags.average, cls: "bg-blue-400/10 text-blue-400" };
+    return { label: FEEDBACK.scoreTags.needsWork, cls: "bg-yellow-400/10 text-yellow-400" };
 }
 
-/**
- * Get score color class based on score value
- */
 export function getScoreColor(score: number): string {
     if (score >= 8) return "text-green-400";
     if (score >= 6) return "text-yellow-400";
     return "text-red-400";
 }
 
-/**
- * Get score background class based on score value
- */
 export function getScoreBg(score: number): string {
-    if (score >= 8)
-        return "bg-green-400/10 border-green-400/20 text-green-400";
-    if (score >= 6)
-        return "bg-yellow-400/10 border-yellow-400/20 text-yellow-400";
+    if (score >= 8) return "bg-green-400/10 border-green-400/20 text-green-400";
+    if (score >= 6) return "bg-yellow-400/10 border-yellow-400/20 text-yellow-400";
     return "bg-red-400/10 border-red-400/20 text-red-400";
 }
 
-/**
- * Format date for display (e.g., "15 Jun 2026, 14:30")
- */
 export function formatSessionDate(isoString: string): string {
     return new Date(isoString).toLocaleDateString("en-GB", {
         day: "numeric",
