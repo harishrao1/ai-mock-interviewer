@@ -9,7 +9,7 @@ import type {
 // ─── Toggle ───────────────────────────────────────────────────────────────────
 // Set to true to skip the API and use hardcoded data (faster dev / UI testing).
 // Set to false to hit the real Groq API using VITE_GROQ_API_KEY.
-export const USE_DUMMY_DATA = true;
+export const USE_DUMMY_DATA = false;
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ── Real API ──────────────────────────────────────────────────────────────────
